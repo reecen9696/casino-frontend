@@ -1,0 +1,32 @@
+{
+  "aboutPages": [
+    {
+      "id": "intro",
+      "title": "Atomic Protocol: The Hyperliquid of Gaming",
+      "subtitle": "A dedicated, high-performance Layer 1 engineered specifically for betting and gaming.",
+      "sectionTitle": "Introduction",
+      "body": "GambleFi is exploding, but the infrastructure powering it is stuck in the past. Most platforms today are just applications trying to run on congested, general-purpose blockchains that weren't built for high-speed gaming.\n\nAtomic Protocol changes the game. We are building the \"Hyperliquid of Casinos\"—a dedicated, high-performance Layer 1 blockchain engineered specifically for betting. By building the chain from the ground up for this one purpose, we deliver a trading and gaming experience that is faster, fairer, and more reliable than anything else on the market."
+    },
+    {
+      "id": "problem",
+      "title": "The Problem",
+      "subtitle": "Most crypto casinos still rely on \"trust me\" infrastructure and opaque execution.",
+      "sectionTitle": "\"Trust Me, Bro\" Technology",
+      "body": "Most crypto casinos today are black boxes. They ask you to deposit funds into a smart contract you can't read, run by a centralized team you don't know, on a blockchain that might degrade under congestion.\n\nMany platforms rely on federated setups where a small set of insiders control critical components like randomness and execution, which means the house can theoretically manipulate outcomes or freeze funds. Players are forced to trust the operator—defeating the core promise of crypto."
+    },
+    {
+      "id": "competition",
+      "title": "Competitor Analysis",
+      "subtitle": "Why Atomic’s architecture, performance, and transparency beat application-layer casino networks.",
+      "sectionTitle": "Atomic vs. Proov Network",
+      "body": "To understand why Atomic is superior, it helps to compare it to Proov Network.\n\nArchitecture: Proov is an application built on top of Solana, meaning it inherits Solana’s congestion and downtime risks. Atomic is a sovereign blockchain optimized solely for gaming throughput.\n\nPerformance: Proov is limited by Solana’s block times. Atomic is 80% faster than Solana, processing bets with the speed required for institutional-grade trading.\n\nTransparency: Proov relies on opaque, private processes. Atomic is publicly verifiable—anyone can audit the chain in real-time to prove fairness."
+    },
+    {
+      "id": "technology",
+      "title": "High-Performance Consensus",
+      "subtitle": "Instant validation with a BFT approach built for speed, reliability, and verifiability.",
+      "sectionTitle": "High-Performance BFT Consensus",
+      "body": "Atomic Protocol utilizes an advanced Byzantine Fault Tolerance (BFT) consensus mechanism—the same high-performance approach used by Hyperliquid—to validate transactions instantly.\n\nThis ensures that our backend is fully transparent and immutable: from the precise millisecond a user clicks \"wager\" through to funds landing back in their wallet, every single step is recorded on-chain and publicly verifiable.\n\nThere are no hidden steps, no optimistic assumptions, and no waiting—just pure, unmanipulatable speed."
+    }
+  ]
+}
