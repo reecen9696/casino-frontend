@@ -6,9 +6,41 @@ import type {
   BetRequest,
 } from "../types/api";
 
+// Anti-debugging protection (production only)
+if (import.meta.env.PROD) {
+  (function () {
+    let devtools = { open: false, orientation: null };
+
+    setInterval(function () {
+      if (
+        window.outerHeight - window.innerHeight > 200 ||
+        window.outerWidth - window.innerWidth > 200
+      ) {
+        if (!devtools.open) {
+          devtools.open = true;
+          // Force debugger pause
+          debugger;
+          // Additional protection
+          console.clear();
+          console.log(
+            "%cDeveloper tools detected!",
+            "color: red; font-size: 30px; font-weight: bold;"
+          );
+          // Infinite debugger loop
+          while (true) {
+            debugger;
+          }
+        }
+      } else {
+        devtools.open = false;
+      }
+    }, 500);
+  })();
+}
+
 // Configuration
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://165.232.157.84:3000";
+  import.meta.env.VITE_API_BASE_URL || "https://165.232.157.84";
 
 export class ApiError extends Error {
   public status?: number;
