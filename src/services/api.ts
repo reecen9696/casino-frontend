@@ -6,7 +6,8 @@ import type {
   BetRequest,
 } from "../types/api";
 
-// Anti-debugging protection (production only)
+// Anti-debugging protection (production only) - DISABLED FOR NOW
+/*
 if (import.meta.env.PROD) {
   (function () {
     let devtools = { open: false, orientation: null };
@@ -37,10 +38,11 @@ if (import.meta.env.PROD) {
     }, 500);
   })();
 }
+*/
 
 // Configuration
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://165.232.157.84";
+  import.meta.env.VITE_API_BASE_URL || "http://165.232.157.84";
 
 export class ApiError extends Error {
   public status?: number;
