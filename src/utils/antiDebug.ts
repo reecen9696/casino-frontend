@@ -3,14 +3,15 @@ class AntiDebug {
   private intervals: NodeJS.Timeout[] = [];
 
   constructor() {
-    // Only run in production
-    // Temporarily disabled for API development
-    // if (import.meta.env.PROD) {
-    //   this.init();
-    // }
+    // Check if anti-debug is enabled via environment variable
+    const enableAntiDebug = import.meta.env.VITE_ENABLE_ANTI_DEBUG !== "false";
+
+    // Only run in production and when enabled
+    if (import.meta.env.PROD && enableAntiDebug) {
+      this.init();
+    }
   }
 
-  // @ts-ignore - Method temporarily disabled for API development
   private init() {
     // Method 1: DevTools size detection
     this.intervals.push(
@@ -56,7 +57,7 @@ class AntiDebug {
     // Disable right-click
     document.addEventListener("contextmenu", (e) => e.preventDefault());
 
-    // Disable F12, Ctrl+Shift+I, Ctrl+U - DISABLED for API development
+    // Disable F12, Ctrl+Shift+I, Ctrl+U
     document.addEventListener("keydown", function (e) {
       if (
         e.key === "F12" ||
@@ -65,7 +66,7 @@ class AntiDebug {
         (e.ctrlKey && e.key === "U")
       ) {
         e.preventDefault();
-        // debugger; // Disabled
+        debugger;
       }
     });
   }
@@ -95,12 +96,12 @@ class AntiDebug {
       "color: orange; font-size: 14px;"
     );
 
-    // Infinite debugger loop - DISABLED for API development
-    // const infiniteDebugger = () => {
-    //   debugger;
-    //   setTimeout(infiniteDebugger, 100);
-    // };
-    // infiniteDebugger();
+    // Infinite debugger loop
+    const infiniteDebugger = () => {
+      debugger;
+      setTimeout(infiniteDebugger, 100);
+    };
+    infiniteDebugger();
   }
 
   public destroy() {
@@ -108,9 +109,13 @@ class AntiDebug {
   }
 }
 
-// Auto-initialize only in production - DISABLED for API development
-// if (typeof window !== "undefined" && import.meta.env.PROD) {
-//   new AntiDebug();
-// }
+// Auto-initialize only in production and when enabled
+if (
+  typeof window !== "undefined" &&
+  import.meta.env.PROD &&
+  import.meta.env.VITE_ENABLE_ANTI_DEBUG !== "false"
+) {
+  new AntiDebug();
+}
 
 export default AntiDebug;

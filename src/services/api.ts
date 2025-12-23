@@ -6,9 +6,10 @@ import type {
   BetRequest,
 } from "../types/api";
 
-// Anti-debugging protection (production only) - DISABLED FOR NOW
-/*
-if (import.meta.env.PROD) {
+// Anti-debugging protection with toggle flag
+const ENABLE_ANTI_DEBUG = import.meta.env.VITE_ENABLE_ANTI_DEBUG !== "false";
+
+if (import.meta.env.PROD && ENABLE_ANTI_DEBUG) {
   (function () {
     let devtools = { open: false, orientation: null };
 
@@ -38,11 +39,23 @@ if (import.meta.env.PROD) {
     }, 500);
   })();
 }
-*/
 
 // Configuration
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://165-232-157-84.nip.io";
+const getApiBaseUrl = () => {
+  // Check if environment variable is set
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  // Default URLs based on environment
+  if (import.meta.env.PROD) {
+    return "https://165-232-157-84.nip.io";
+  } else {
+    return "http://165.232.157.84:8080";
+  }
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export class ApiError extends Error {
   public status?: number;
