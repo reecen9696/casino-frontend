@@ -10,6 +10,7 @@ class AntiDebug {
     // }
   }
 
+  // @ts-ignore - Method temporarily disabled for API development
   private init() {
     // Method 1: DevTools size detection
     this.intervals.push(
