@@ -170,3 +170,38 @@ export function createLoadingSkeleton(count: number = 12): any[] {
     loading: true,
   }));
 }
+
+/**
+ * Copy text to clipboard and show feedback
+ */
+export async function copyToClipboard(text: string, showToast?: (message: string) => void): Promise<boolean> {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      // Use modern clipboard API if available
+      await navigator.clipboard.writeText(text);
+    } else {
+      // Fallback for older browsers or non-secure contexts
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand('copy');
+      textArea.remove();
+    }
+    
+    if (showToast) {
+      showToast('Copied to clipboard!');
+    }
+    return true;
+  } catch (err) {
+    console.error('Failed to copy to clipboard:', err);
+    if (showToast) {
+      showToast('Failed to copy to clipboard');
+    }
+    return false;
+  }
+}
