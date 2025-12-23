@@ -255,18 +255,33 @@ const Explore: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <span>{bet.hash}</span>
                         <button
-                          onClick={() => handleCopy(bet.id, 'Transaction')}
-                          className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+                          onClick={() => handleCopy(bet.id, "Transaction")}
+                          className="opacity-100 hover:opacity-60 transition-opacity cursor-pointer"
                           title="Copy full transaction hash"
                         >
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
                             <g clipPath="url(#clip0_46_1538)">
-                              <path d="M13.4449 3.38477H5.44005C4.30495 3.38477 3.38477 4.30495 3.38477 5.44005V13.4449C3.38477 14.58 4.30495 15.5001 5.44005 15.5001H13.4449C14.58 15.5001 15.5001 14.58 15.5001 13.4449V5.44005C15.5001 4.30495 14.58 3.38477 13.4449 3.38477Z" stroke="currentColor" strokeLinejoin="round"/>
-                              <path d="M12.5974 3.38462L12.6154 2.51923C12.6139 1.98417 12.4006 1.47145 12.0223 1.0931C11.6439 0.714751 11.1312 0.501522 10.5962 0.5H2.80769C2.19621 0.501807 1.61029 0.745519 1.1779 1.1779C0.745519 1.61029 0.501807 2.19621 0.5 2.80769V10.5962C0.501522 11.1312 0.714751 11.6439 1.0931 12.0223C1.47145 12.4006 1.98417 12.6139 2.51923 12.6154H3.38462" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path
+                                d="M13.4449 3.38477H5.44005C4.30495 3.38477 3.38477 4.30495 3.38477 5.44005V13.4449C3.38477 14.58 4.30495 15.5001 5.44005 15.5001H13.4449C14.58 15.5001 15.5001 14.58 15.5001 13.4449V5.44005C15.5001 4.30495 14.58 3.38477 13.4449 3.38477Z"
+                                stroke="currentColor"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M12.5974 3.38462L12.6154 2.51923C12.6139 1.98417 12.4006 1.47145 12.0223 1.0931C11.6439 0.714751 11.1312 0.501522 10.5962 0.5H2.80769C2.19621 0.501807 1.61029 0.745519 1.1779 1.1779C0.745519 1.61029 0.501807 2.19621 0.5 2.80769V10.5962C0.501522 11.1312 0.714751 11.6439 1.0931 12.0223C1.47145 12.4006 1.98417 12.6139 2.51923 12.6154H3.38462"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
                             </g>
                             <defs>
                               <clipPath id="clip0_46_1538">
-                                <rect width="16" height="16" fill="white"/>
+                                <rect width="16" height="16" fill="white" />
                               </clipPath>
                             </defs>
                           </svg>
@@ -283,18 +298,35 @@ const Explore: React.FC = () => {
                         </span>
                         {bet.vrf_output && (
                           <button
-                            onClick={() => handleCopy(bet.vrf_output || '', 'VRF')}
-                            className="opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+                            onClick={() =>
+                              handleCopy(bet.vrf_output || "", "VRF")
+                            }
+                            className="opacity-100 hover:opacity-60 transition-opacity cursor-pointer"
                             title="Copy full VRF output"
                           >
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
                               <g clipPath="url(#clip0_46_1538_vrf)">
-                                <path d="M13.4449 3.38477H5.44005C4.30495 3.38477 3.38477 4.30495 3.38477 5.44005V13.4449C3.38477 14.58 4.30495 15.5001 5.44005 15.5001H13.4449C14.58 15.5001 15.5001 14.58 15.5001 13.4449V5.44005C15.5001 4.30495 14.58 3.38477 13.4449 3.38477Z" stroke="currentColor" strokeLinejoin="round"/>
-                                <path d="M12.5974 3.38462L12.6154 2.51923C12.6139 1.98417 12.4006 1.47145 12.0223 1.0931C11.6439 0.714751 11.1312 0.501522 10.5962 0.5H2.80769C2.19621 0.501807 1.61029 0.745519 1.1779 1.1779C0.745519 1.61029 0.501807 2.19621 0.5 2.80769V10.5962C0.501522 11.1312 0.714751 11.6439 1.0931 12.0223C1.47145 12.4006 1.98417 12.6139 2.51923 12.6154H3.38462" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path
+                                  d="M13.4449 3.38477H5.44005C4.30495 3.38477 3.38477 4.30495 3.38477 5.44005V13.4449C3.38477 14.58 4.30495 15.5001 5.44005 15.5001H13.4449C14.58 15.5001 15.5001 14.58 15.5001 13.4449V5.44005C15.5001 4.30495 14.58 3.38477 13.4449 3.38477Z"
+                                  stroke="currentColor"
+                                  strokeLinejoin="round"
+                                />
+                                <path
+                                  d="M12.5974 3.38462L12.6154 2.51923C12.6139 1.98417 12.4006 1.47145 12.0223 1.0931C11.6439 0.714751 11.1312 0.501522 10.5962 0.5H2.80769C2.19621 0.501807 1.61029 0.745519 1.1779 1.1779C0.745519 1.61029 0.501807 2.19621 0.5 2.80769V10.5962C0.501522 11.1312 0.714751 11.6439 1.0931 12.0223C1.47145 12.4006 1.98417 12.6139 2.51923 12.6154H3.38462"
+                                  stroke="currentColor"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
                               </g>
                               <defs>
                                 <clipPath id="clip0_46_1538_vrf">
-                                  <rect width="16" height="16" fill="white"/>
+                                  <rect width="16" height="16" fill="white" />
                                 </clipPath>
                               </defs>
                             </svg>
