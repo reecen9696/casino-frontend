@@ -64,7 +64,6 @@ const ProvablyFair: React.FC = () => {
       return;
     }
 
-    setIsVerifying(true);
     setVerificationResult(null);
 
     try {
@@ -98,8 +97,6 @@ const ProvablyFair: React.FC = () => {
         message:
           "❌ Verification failed. Please check your inputs and try again.",
       });
-    } finally {
-      setIsVerifying(false);
     }
   };
 
