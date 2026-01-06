@@ -19,7 +19,6 @@ const ProvablyFair: React.FC = () => {
   });
   const [verificationResult, setVerificationResult] =
     useState<VRFVerificationResult | null>(null);
-  const [isVerifying, setIsVerifying] = useState(false);
 
   const sections = [
     {
@@ -65,7 +64,6 @@ const ProvablyFair: React.FC = () => {
       return;
     }
 
-    setIsVerifying(true);
     setVerificationResult(null);
 
     try {
@@ -99,8 +97,6 @@ const ProvablyFair: React.FC = () => {
         message:
           "❌ Verification failed. Please check your inputs and try again.",
       });
-    } finally {
-      setIsVerifying(false);
     }
   };
 
