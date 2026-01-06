@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
               >
                 <img
                   src="/atomicnetwork.png"
-                  alt="Atomic Network"
+                  alt="Atomiq Network"
                   className="w-28 object-contain"
                 />
               </Link>
