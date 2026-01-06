@@ -312,8 +312,9 @@ const CoinFlip: React.FC = () => {
                       className="w-6 h-6 flex-shrink-0"
                     />
                     <div className="text-white text-sm font-aeonik">
-                      Deposits disabled during testnet. Wagering defaults to
-                      Sol.
+                      {!connected
+                        ? "Connect wallet"
+                        : "Deposits disabled during testnet. Wagering defaults to Sol."}
                     </div>
                   </div>
                 </div>
@@ -519,7 +520,9 @@ const CoinFlip: React.FC = () => {
                       className="w-6 h-6 flex-shrink-0"
                     />
                     <div className="text-white text-sm font-aeonik">
-                      Wagering SOL. Deposits disabled during testnet.
+                      {!connected
+                        ? "Connect wallet"
+                        : "Deposits disabled during Testnet. Wagering SOL."}
                     </div>
                   </div>
                 </div>
