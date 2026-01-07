@@ -94,6 +94,20 @@ const CoinFlip: React.FC = () => {
     <div className="min-h-screen bg-casino-bg text-white">
       {/* Main Game Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-16">
+        {/* Permanent Testnet Message */}
+        <div className="w-full p-4 mb-6 border border-[#1E2938] bg-[#6A14ED]/20 rounded-lg">
+          <div className="flex items-center justify-center gap-3">
+            <img
+              src="/alert.svg"
+              alt="Alert"
+              className="w-6 h-6 flex-shrink-0"
+            />
+            <div className="text-white text-sm font-aeonik text-center">
+              Deposits Disabled During Testnet. Wagering Demo Currency
+            </div>
+          </div>
+        </div>
+
         {/* Mobile: Game Screen First, Controls Below */}
         <div className="block lg:hidden">
           {/* Game Screen - Mobile */}
@@ -302,24 +316,6 @@ const CoinFlip: React.FC = () => {
                 </button>
               </div>
 
-              {/* Testnet Alert */}
-              {betHistory.length === 0 && (
-                <div className="w-full p-4 border border-[#1E2938] bg-[#6A14ED]/20 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/alert.svg"
-                      alt="Alert"
-                      className="w-6 h-6 flex-shrink-0"
-                    />
-                    <div className="text-white text-sm font-aeonik">
-                      {!connected
-                        ? "Connect wallet"
-                        : "Deposits disabled during testnet. Wagering defaults to Sol."}
-                    </div>
-                  </div>
-                </div>
-              )}
-
               {/* Performance Analytics */}
               {betHistory.length > 0 && (
                 <div className="pt-6 mt-auto">
@@ -509,24 +505,6 @@ const CoinFlip: React.FC = () => {
                   Tails
                 </button>
               </div>
-
-              {/* Testnet Alert */}
-              {betHistory.length === 0 && (
-                <div className="w-full p-4 border border-[#1E2938] bg-[#6A14ED]/20 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src="/alert.svg"
-                      alt="Alert"
-                      className="w-6 h-6 flex-shrink-0"
-                    />
-                    <div className="text-white text-sm font-aeonik">
-                      {!connected
-                        ? "Connect wallet"
-                        : "Deposits disabled during Testnet. Wagering SOL."}
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* Performance Analytics */}
               {betHistory.length > 0 && (
