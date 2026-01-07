@@ -8,6 +8,7 @@ import CoinFlip from "./pages/games/CoinFlip";
 import Slots from "./pages/games/Slots";
 import ProvablyFair from "./pages/ProvablyFair";
 import Explore from "./components/Explore";
+import Verify from "./pages/Verify";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/test/coinflip" element={<CoinFlip />} />
             <Route path="/test/slots" element={<Slots />} />
             <Route path="/verify" element={<ProvablyFair />} />
+            <Route path="/verify/:transactionId" element={<Verify />} />
           </Routes>
         </div>
       </ToastProvider>

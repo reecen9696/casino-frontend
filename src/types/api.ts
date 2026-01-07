@@ -20,6 +20,7 @@ export interface BetRecord {
   game_type: string;
   vrf_proof: string;
   vrf_output: string;
+  vrf_public_key?: string; // Optional for backwards compatibility
 }
 
 export interface GameResult {
