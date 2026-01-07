@@ -27,6 +27,27 @@
       "subtitle": "Instant validation with a BFT approach built for speed, reliability, and verifiability.",
       "sectionTitle": "High-Performance BFT Consensus",
       "body": "Atomic Protocol utilizes an advanced Byzantine Fault Tolerance (BFT) consensus mechanism—the same high-performance approach used by Hyperliquid—to validate transactions instantly.\n\nThis ensures that our backend is fully transparent and immutable: from the precise millisecond a user clicks \"wager\" through to funds landing back in their wallet, every single step is recorded on-chain and publicly verifiable.\n\nThere are no hidden steps, no optimistic assumptions, and no waiting—just pure, unmanipulatable speed."
+    },
+    {
+      "id": "overview",
+      "title": "Provably Fair Overview",
+      "subtitle": "Understanding Provably Fair Gaming",
+      "sectionTitle": "What is Provably Fair?",
+      "body": "Provably fair gaming represents a revolutionary approach to online gambling that ensures complete transparency and fairness. Unlike traditional online casinos where players must trust that the house isn't manipulating results, provably fair systems provide cryptographic proof that every game outcome is fair and unbiased.\n\nOur platform uses Verifiable Random Functions (VRF) to generate game outcomes. This means that every result can be independently verified by anyone, ensuring that neither the casino nor players can manipulate the outcome after a bet is placed.\n\nThe system works by combining unpredictable blockchain data (like block hashes) with your transaction details to create a unique, verifiable random output for each game. This output is then used to determine the game result in a deterministic way that can be verified by anyone."
+    },
+    {
+      "id": "vrf",
+      "title": "VRF Implementation",
+      "subtitle": "Verifiable Random Functions",
+      "sectionTitle": "VRF Technology Deep Dive",
+      "body": "Our casino uses ECVRF (Elliptic Curve Verifiable Random Function) with the SECP256K1_SHA256_TAI cipher suite from the vrf crate v0.2.5. This implementation provides RFC 9381 compliant cryptographic randomness with Ed25519 key management.\n\nEach game outcome uses a VRF message constructed with SEC-4 Enhanced Chain Context binding that includes: chain ID, block height, block hash, previous app hash, block randomness, transaction hash, transaction index, wallet address, nonce, and timestamp. This ensures maximum security against replay attacks.\n\nThe VRF produces both a cryptographic proof and a deterministic output. Game results are derived using SHA256(vrf_output)[0] & 1 - even bytes = heads, odd bytes = tails. This derivation is publicly verifiable and impossible to manipulate.\n\nTechnical Specification:\n\n• VRF Implementation: ECVRF with SECP256K1_SHA256_TAI cipher suite\n\n• Key Management: Ed25519 signing keys with persistent storage\n\n• Message Hashing: SHA256 with RFC 9381 domain separation\n\n• Result Derivation: SHA256 hash of VRF output, least significant bit\n\n• Proof Format: Base64-encoded ECVRF proof bytes\n\n• Security Level: 128-bit security with collision resistance"
+    },
+    {
+      "id": "implementation",
+      "title": "Technical Implementation",
+      "subtitle": "Technical Details",
+      "sectionTitle": "Technical Implementation",
+      "body": "Our provably fair system is built on CometBFT consensus with a custom ABCI (Application Blockchain Interface) application written in Rust. Each game transaction triggers VRF computation using the vrf crate v0.2.5 with ECVRF implementation.\n\nThe system uses Ed25519-based VRF keys that are persistently stored in a Sled embedded database. VRF messages are constructed using SEC-4 Enhanced Chain Context binding, combining blockchain state (block height, hash, timestamp) with transaction data (hash, wallet, nonce) for maximum security.\n\nGame results are derived deterministically from VRF output using SHA256(vrf_output)[0] & 1. This ensures that outcomes are mathematically provable and cannot be manipulated by any party, including the casino operators.\n\nVRF Message Construction:\nSEC-4 Enhanced Chain Context Version:\nVRF_MESSAGE = SHA256(\"MYCHAIN:VRF:SEC4:FULL:v1\" || chain_context || transaction_data)\nWhere chain_context includes block height, hash, previous app hash, block random, and timestamp\n\nResult Derivation:\nresult_hash = SHA256(vrf_output)\ncoin_flip = (result_hash[0] & 1) == 1 ? \"heads\" : \"tails\"\n\nVerification Libraries:\n\n• Rust VRF Crate: vrf = \"0.2.5\" with ECVRF implementation\n\n• Ed25519 Keys: ed25519-dalek = \"2.1\" for key management\n\n• Hashing: sha2 = \"0.10\" for SHA256, blake3 = \"1.5\" for block randomness\n\n• Consensus: tower-abci = \"0.12\" and tendermint = \"0.34\"\n\nAPI Response Format:\n{\n  \"tx_hash\": \"3B63730078FF47BD...\",\n  \"result\": \"heads\",\n  \"vrf_proof\": \"base64_encoded_ecvrf_proof\",\n  \"vrf_output\": \"base64_encoded_vrf_output\",\n  \"vrf_public_key\": \"base64_encoded_ed25519_public_key\",\n  \"height\": 12345\n}"
     }
   ]
 }
