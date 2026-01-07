@@ -23,9 +23,7 @@ const Navbar: React.FC = () => {
         location.pathname === "/test" || location.pathname.startsWith("/test/")
       );
     }
-    if (path === "/verify") {
-      return location.pathname === "/verify";
-    }
+
     return location.pathname === path;
   };
 
@@ -81,16 +79,6 @@ const Navbar: React.FC = () => {
                   }`}
                 >
                   Test
-                </Link>
-                <Link
-                  to="/verify"
-                  className={`py-1 text-base font-aeonik font-medium transition-colors ${
-                    isActive("/verify")
-                      ? "text-white border-b-2 border-white"
-                      : "text-white hover:text-gray-300"
-                  }`}
-                >
-                  Verify
                 </Link>
               </div>
             </div>
@@ -235,17 +223,6 @@ const Navbar: React.FC = () => {
                 }`}
               >
                 Test
-              </Link>
-              <Link
-                to="/verify"
-                onClick={closeMobileMenu}
-                className={`block text-2xl font-aeonik font-medium ${
-                  isActive("/verify")
-                    ? "text-white"
-                    : "text-white/70 hover:text-white"
-                }`}
-              >
-                Verify
               </Link>
             </div>
 
