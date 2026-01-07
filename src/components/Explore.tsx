@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useStats, useBets } from "../hooks/useApi";
 import {
   formatNumber,
@@ -12,6 +13,7 @@ import {
 } from "../utils/dataTransforms";
 
 const Explore: React.FC = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
   const itemsPerPage = 20; // Increased from 12 to 20
@@ -41,6 +43,11 @@ const Explore: React.FC = () => {
     }
   };
 
+  // Navigate to verification page
+  const handleBetClick = (txHash: string) => {
+    navigate(`/verify/${txHash}`);
+  };
+
   // Transform bet data for display
   const displayBets =
     betsData?.bets?.map(transformBetRecord) ||
@@ -54,7 +61,7 @@ const Explore: React.FC = () => {
           Explore
         </h1>
         <p className="text-base font-aeonik text-white opacity-70">
-          Review protocol stats and activity.
+          Review protocol stats and activity. Click any bet to verify its VRF proof.
         </p>
       </div>
 
@@ -220,7 +227,7 @@ const Explore: React.FC = () => {
                 // Handle loading skeleton
                 if (bet.loading) {
                   return (
-                    <tr key={bet.id}>
+                    <tr key={bet.id} className="hover:bg-white/5 transition-colors">
                       <td className="py-4 px-4 text-base font-aeonik text-white w-1/7">
                         <div className="animate-pulse bg-gray-600 h-4 rounded w-20"></div>
                       </td>
@@ -247,7 +254,12 @@ const Explore: React.FC = () => {
                 }
 
                 return (
-                  <tr key={bet.id}>
+                  <tr 
+                    key={bet.id}
+                    onClick={() => handleBetClick(bet.id)}
+                    className="hover:bg-white/5 transition-colors cursor-pointer"
+                    title="Click to verify this bet"
+                  >
                     <td className="py-4 px-4 text-base font-aeonik text-white w-1/8">
                       {bet.block}
                     </td>
@@ -255,7 +267,10 @@ const Explore: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <span>{bet.hash}</span>
                         <button
-                          onClick={() => handleCopy(bet.id, "Transaction")}
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent row click
+                            handleCopy(bet.id, "Transaction");
+                          }}
                           className="opacity-100 hover:opacity-60 transition-opacity cursor-pointer"
                           title="Copy full transaction hash"
                         >
@@ -298,9 +313,10 @@ const Explore: React.FC = () => {
                         </span>
                         {bet.vrf_output && (
                           <button
-                            onClick={() =>
-                              handleCopy(bet.vrf_output || "", "VRF")
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent row click
+                              handleCopy(bet.vrf_output || "", "VRF");
+                            }}
                             className="opacity-100 hover:opacity-60 transition-opacity cursor-pointer"
                             title="Copy full VRF output"
                           >
