@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center space-x-3">
               {/* X (Twitter) Icon */}
               <a
-                href="https://x.com/TheAtomicChain"
+                href="https://x.com/TheAtomiqChain"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-gray-300 transition-colors"
@@ -220,7 +220,7 @@ const Navbar: React.FC = () => {
               <div className="flex items-center space-x-6">
                 {/* X (Twitter) Icon */}
                 <a
-                  href="https://x.com/TheAtomicChain"
+                  href="https://x.com/TheAtomiqChain"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-gray-300 transition-colors"
