@@ -9,6 +9,7 @@ import Slots from "./pages/games/Slots";
 import ProvablyFair from "./pages/ProvablyFair";
 import Explore from "./components/Explore";
 import Verify from "./pages/Verify";
+import FAQ from "./pages/FAQ";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/test" element={<Test />} />
             <Route path="/test/coinflip" element={<CoinFlip />} />
             <Route path="/test/slots" element={<Slots />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route path="/verify" element={<ProvablyFair />} />
             <Route path="/verify/:transactionId" element={<Verify />} />
           </Routes>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -18,12 +17,6 @@ const Navbar: React.FC = () => {
     if (path === "/explore") {
       return location.pathname === "/" || location.pathname === "/explore";
     }
-    if (path === "/test") {
-      return (
-        location.pathname === "/test" || location.pathname.startsWith("/test/")
-      );
-    }
-
     return location.pathname === path;
   };
 
@@ -71,42 +64,43 @@ const Navbar: React.FC = () => {
                   Explore
                 </Link>
                 <Link
-                  to="/test"
+                  to="/faq"
                   className={`py-1 text-base font-aeonik font-medium transition-colors ${
-                    isActive("/test")
+                    isActive("/faq")
                       ? "text-white border-b-2 border-white"
                       : "text-white hover:text-gray-300"
                   }`}
                 >
-                  Test
+                  FAQ
                 </Link>
+                <a
+                  href="https://casino.atomiq.network"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-1 text-base font-aeonik font-medium text-white hover:text-gray-300 transition-colors"
+                >
+                  Play
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Desktop Right Section - Social Icons + Connect Button */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Social Icons */}
-            <div className="flex items-center space-x-3">
-              {/* X (Twitter) Icon */}
-              <a
-                href="https://x.com/TheAtomicChain"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-gray-300 transition-colors"
+          {/* Desktop Right Section - Social Icons */}
+          <div className="hidden md:flex items-center">
+            <a
+              href="https://x.com/TheAtomicChain"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-gray-300 transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-            </div>
-
-            {/* Connect Wallet Button */}
-            <WalletMultiButton className="!bg-white !text-casino-bg !px-8 !py-3 !rounded-full !font-aeonik !font-medium hover:!bg-gray-200 !transition-colors" />
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -202,41 +196,43 @@ const Navbar: React.FC = () => {
                 Explore
               </Link>
               <Link
-                to="/test"
+                to="/faq"
                 onClick={closeMobileMenu}
                 className={`block text-2xl font-aeonik font-medium ${
-                  isActive("/test")
+                  isActive("/faq")
                     ? "text-white"
                     : "text-white/70 hover:text-white"
                 }`}
               >
-                Test
+                FAQ
               </Link>
+              <a
+                href="https://casino.atomiq.network"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMobileMenu}
+                className="block text-2xl font-aeonik font-medium text-white/70 hover:text-white"
+              >
+                Play
+              </a>
             </div>
 
-            {/* Bottom section with social and connect button */}
-            <div className="space-y-6">
-              {/* Social Icons */}
-              <div className="flex items-center space-x-6">
-                {/* X (Twitter) Icon */}
-                <a
-                  href="https://x.com/TheAtomicChain"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-gray-300 transition-colors"
+            {/* Bottom section with social */}
+            <div>
+              <a
+                href="https://x.com/TheAtomicChain"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-gray-300 transition-colors"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-              </div>
-
-              {/* Connect Wallet Button */}
-              <WalletMultiButton className="!w-full !bg-white !text-casino-bg !px-8 !py-4 !rounded-full !font-aeonik !font-medium hover:!bg-gray-200 !transition-colors !text-lg" />
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>

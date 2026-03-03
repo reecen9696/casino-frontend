@@ -16,7 +16,16 @@ const Explore: React.FC = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
-  const itemsPerPage = 20; // Increased from 12 to 20
+  const [searchQuery, setSearchQuery] = useState("");
+  const itemsPerPage = 20;
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = searchQuery.trim();
+    if (query.length > 0) {
+      navigate(`/verify/${query}`);
+    }
+  };
 
   // Fetch stats and bets from API
   const { data: stats, loading: statsLoading } = useStats();
@@ -187,9 +196,33 @@ const Explore: React.FC = () => {
 
       {/* Bets Section */}
       <div className="mt-12">
-        <h2 className="text-3xl font-bold font-aeonik text-white mb-6 text-left">
-          Bets
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <h2 className="text-3xl font-bold font-aeonik text-white text-left">
+            Bets
+          </h2>
+          <form onSubmit={handleSearch} className="relative w-full sm:w-96">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by Transaction ID..."
+              className="w-full pl-10 pr-4 py-2.5 bg-casino-card border border-casino-border rounded-lg text-sm font-aeonik text-white placeholder-white/40 focus:outline-none focus:border-white/30 transition-colors"
+            />
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white opacity-40"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </form>
+        </div>
 
         {/* Bets Table */}
         <div className="overflow-x-auto">

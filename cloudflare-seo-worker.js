@@ -111,12 +111,20 @@ function explorerAppSchema() {
 function faqPageSchema() {
   const faqs = [
     {
+      q: "What problem does Atomiq solve for online gambling?",
+      a: "The online gambling market is limited by a single bottleneck: Trust. Players are tired of casinos where they must trust a brand's promise that odds aren't rigged and funds are safe. The industry is shifting from trust-based systems (brand promises) to proof-based systems (cryptographic evidence). Atomiq replaces trust with proof — every bet uses on-chain VRF (Verifiable Random Function), making outcome manipulation impossible. Settlement data is baked into the blockchain, allowing for real-time, independent auditing of every hand played.",
+    },
+    {
       q: "What is Atomiq Protocol and how does it work?",
       a: "Atomiq Protocol is a dedicated, high-performance Layer 1 blockchain engineered specifically for on-chain gambling and betting. Unlike general-purpose blockchains, Atomiq is purpose-built for gaming throughput using BFT (Byzantine Fault Tolerance) consensus — the same approach used by Hyperliquid. It runs the game logic and VRF (Verifiable Random Function) layer natively, then settles outcomes on Solana for fast finality and full public auditability. Every bet, from the millisecond a user clicks 'wager' to funds landing back in their wallet, is recorded on-chain and publicly verifiable.",
     },
     {
       q: "Why are most crypto casinos not truly provably fair?",
       a: "Most crypto casinos today are black boxes. They ask players to deposit funds into smart contracts they can't read, run by centralized teams on congested general-purpose blockchains. Many rely on federated setups where a small set of insiders control critical components like randomness generation and execution, meaning the house can theoretically manipulate outcomes or freeze funds. Players are forced to trust the operator — defeating the core promise of crypto. Atomiq solves this by making every step fully on-chain and publicly verifiable, with no hidden processes or centralized control over randomness.",
+    },
+    {
+      q: "How is Atomiq different from platforms like Luck.io or Proov Network?",
+      a: "Atomiq is the infrastructure layer that perfects what other platforms attempted. We don't just promise fairness — we mathematically prove it. Every bet uses on-chain VRF making outcome manipulation impossible. Settlement data is baked into the blockchain for real-time, independent auditing. While competing platforms are applications built on general-purpose blockchains (inheriting their congestion and downtime risks), Atomiq is a sovereign blockchain optimized solely for gaming throughput — 80% faster than Solana for bet processing, with full public auditability in real time.",
     },
     {
       q: "How does BFT consensus work for on-chain gambling?",
@@ -131,12 +139,12 @@ function faqPageSchema() {
       a: "Atomiq is fully non-custodial, meaning players always retain control of their funds. Unlike traditional crypto casinos that require depositing into opaque smart contracts controlled by the operator, Atomiq's on-chain architecture ensures that funds are handled transparently through BFT-validated transactions. The VRF randomness layer is publicly auditable, settlement happens on Solana for fast finality, and no single party can freeze or redirect player funds. This eliminates the counterparty risk inherent in custodial gambling platforms.",
     },
     {
-      q: "What makes Atomiq different from other blockchain casino platforms?",
-      a: "While competing platforms like Proov Network are applications built on top of general-purpose blockchains like Solana (inheriting their congestion and downtime risks), Atomiq is a sovereign blockchain optimized solely for gaming throughput. Atomiq is 80% faster than Solana for bet processing, uses on-chain VRF for provably fair outcomes rather than opaque private processes, and provides full public auditability in real time. The combination of a dedicated BFT Layer 1, native VRF game logic, and Solana settlement creates an architecture no application-layer solution can match.",
-    },
-    {
       q: "How does Solana settlement work with Atomiq's on-chain gambling?",
       a: "Atomiq runs its game logic and VRF randomness layer on its own BFT-validated Layer 1 chain for maximum speed and gaming-specific throughput. Final outcomes are then settled on Solana, leveraging Solana's fast finality and deep liquidity for the payout layer. This hybrid architecture gives Atomiq the best of both worlds: a purpose-built gaming chain for speed and fairness, plus Solana's ecosystem for settlement, public auditability, and interoperability with the broader DeFi and GambleFi ecosystem.",
+    },
+    {
+      q: "What are immutable audit trails and why do they matter?",
+      a: "Every bet, outcome, and settlement on Atomiq is permanently recorded on the blockchain, creating an immutable audit trail that cannot be altered or deleted. This allows for real-time, independent auditing of every hand played. Casino operators can use this to create public audit logs proving their trustworthiness by displaying real-time RTP (Return to Player) and other key fairness metrics. For players, it means complete transparency — you can verify not just your own bets, but the entire history of the platform.",
     },
     {
       q: "How can I verify that a bet on Atomiq was fair?",
@@ -146,7 +154,7 @@ function faqPageSchema() {
 
   return {
     "@type": "FAQPage",
-    "@id": `${SITE_URL}/about#faqpage`,
+    "@id": `${SITE_URL}/faq#faqpage`,
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.q,
@@ -286,10 +294,24 @@ const ROUTE_CONFIG = {
     schema: () => [
       organizationSchema(),
       websiteSchema(),
-      faqPageSchema(),
       breadcrumbSchema([
         { name: "Home", url: `${SITE_URL}/` },
         { name: "About", url: `${SITE_URL}/about` },
+      ]),
+    ],
+  },
+  "/faq": {
+    title: "FAQ | Provably Fair On-Chain Gambling, BFT Consensus & VRF Verification",
+    description:
+      "Frequently asked questions about Atomiq's on-chain gambling infrastructure — BFT-validated casinos, ECVRF provably fair gaming, non-custodial betting, and Solana settlement.",
+    ogType: "website",
+    schema: () => [
+      organizationSchema(),
+      websiteSchema(),
+      faqPageSchema(),
+      breadcrumbSchema([
+        { name: "Home", url: `${SITE_URL}/` },
+        { name: "FAQ", url: `${SITE_URL}/faq` },
       ]),
     ],
   },
