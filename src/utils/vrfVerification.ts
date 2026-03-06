@@ -66,6 +66,27 @@ export function validateDataPresence(data: VRFVerificationData): VRFValidationRe
 }
 
 /**
+ * Decode a VRF output string to bytes.
+ * The blockchain returns hex-encoded strings; base64 is kept as a fallback
+ * for any legacy data.
+ */
+function vrfOutputToBytes(vrfOutput: string): Uint8Array {
+  const clean = vrfOutput.replace(/\s/g, '');
+
+  // Detect hex: even length and only hex chars
+  if (/^[0-9a-fA-F]+$/.test(clean) && clean.length % 2 === 0) {
+    const bytes = new Uint8Array(clean.length / 2);
+    for (let i = 0; i < clean.length; i += 2) {
+      bytes[i / 2] = parseInt(clean.slice(i, i + 2), 16);
+    }
+    return bytes;
+  }
+
+  // Fallback: try base64
+  return base64ToBytes(clean);
+}
+
+/**
  * Convert base64 string to bytes array
  */
 function base64ToBytes(base64: string): Uint8Array {
@@ -118,9 +139,9 @@ export async function deriveCoinFlipResult(vrfOutput: string): Promise<{
   const process: string[] = [];
   
   try {
-    // Step 1: Decode base64 VRF output
-    process.push(`1. Decode base64 VRF output: ${vrfOutput.substring(0, 20)}...`);
-    const vrfBytes = base64ToBytes(vrfOutput);
+    // Step 1: Decode VRF output (hex from blockchain, base64 as fallback)
+    process.push(`1. Decode VRF output: ${vrfOutput.substring(0, 20)}...`);
+    const vrfBytes = vrfOutputToBytes(vrfOutput);
     process.push(`2. Raw bytes length: ${vrfBytes.length}`);
     
     // Step 2: Calculate SHA256 hash

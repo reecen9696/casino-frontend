@@ -39,11 +39,28 @@ export function truncateHash(hash: string): string {
 }
 
 /**
- * Format a timestamp to a human-readable relative time
+ * Format a timestamp to a human-readable relative time.
+ * Accepts both Unix seconds and Unix milliseconds (auto-detected: > 1e11 → ms).
  */
 export function formatRelativeTime(timestamp: number): string {
+  if (!timestamp || timestamp <= 0) return "Unknown";
+
+  // Auto-detect milliseconds: current Unix ms timestamps are ~1.77e12
+  const ts = timestamp > 1e11 ? Math.floor(timestamp / 1000) : timestamp;
+
   const now = Math.floor(Date.now() / 1000);
-  const diff = now - timestamp;
+  const diff = now - ts;
+
+  // Negative diff = timestamp is in the future (clock skew or wrong data)
+  // Large diff = very old record
+  // In both cases, show the actual date
+  if (diff < 0 || diff > 86400 * 365) {
+    return new Date(ts * 1000).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
 
   if (diff < 60) {
     return `${diff}s ago`;

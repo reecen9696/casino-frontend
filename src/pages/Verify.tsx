@@ -167,7 +167,7 @@ const Verify: React.FC = () => {
             </div>
             <div className="flex justify-between">
               <span className="text-white/70">Timestamp:</span>
-              <span className="text-white">{new Date(betData.timestamp * 1000).toLocaleString()}</span>
+              <span className="text-white">{new Date(betData.timestamp > 1e11 ? betData.timestamp : betData.timestamp * 1000).toLocaleString()}</span>
             </div>
           </div>
         </div>
