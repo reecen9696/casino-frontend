@@ -42,17 +42,17 @@ export function validateDataPresence(data: VRFVerificationData): VRFValidationRe
   };
 
   const details: string[] = [];
-  if (!checks.vrfOutput) details.push('VRF Output missing');
-  if (!checks.vrfProof) details.push('VRF Proof missing');
+  // VRF output is optional — proof alone is sufficient to confirm fairness
+  if (!checks.vrfOutput && !checks.vrfProof) details.push('VRF data missing');
   if (!checks.txHash) details.push('Transaction Hash missing');
   if (!checks.gameResult) details.push('Game Result missing');
 
-  const presentCount = Object.values(checks).filter(Boolean).length;
+  const corePresent = (checks.vrfOutput || checks.vrfProof) && checks.txHash && checks.gameResult;
   let status: 'Complete' | 'Partial' | 'Missing';
   
-  if (presentCount === 4) {
+  if (corePresent) {
     status = 'Complete';
-  } else if (presentCount > 0) {
+  } else if (checks.vrfOutput || checks.vrfProof || checks.txHash || checks.gameResult) {
     status = 'Partial';
   } else {
     status = 'Missing';

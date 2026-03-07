@@ -132,7 +132,11 @@ export function transformBetRecord(bet: BetRecord): DisplayBet {
     result: bet.result || "unknown",
     vrf_proof: bet.vrf_proof || "",
     vrf_output: bet.vrf_output || "",
-    vrf_hash: bet.vrf_output ? truncateHash(bet.vrf_output) : "",
+    vrf_hash: bet.vrf_output
+      ? truncateHash(bet.vrf_output)
+      : bet.vrf_proof
+        ? truncateHash(bet.vrf_proof)
+        : "",
   };
 }
 
