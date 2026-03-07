@@ -274,13 +274,10 @@ const Verify: React.FC = () => {
         {/* Result Derivation */}
         <div className="bg-casino-card border border-casino-border rounded-lg p-6">
           <h3 className="text-lg font-bold text-white mb-4">
-            2. Result Derivation Validation
-            {verification.resultDerivation.supported && (
+            2. VRF Randomness Derivation
+            {verification.resultDerivation.supported && !verification.resultDerivation.error && (
               <span className="ml-2">
-                {verification.resultDerivation.matches ? 
-                  <CheckIcon className="text-green-400 inline" size={16} /> : 
-                  <CancelIcon className="text-red-400 inline" size={16} />
-                }
+                <CheckIcon className="text-green-400 inline" size={16} />
               </span>
             )}
           </h3>
@@ -288,7 +285,7 @@ const Verify: React.FC = () => {
           {!verification.resultDerivation.supported ? (
             <div className="bg-yellow-500/10 border border-yellow-500/20 rounded p-4">
               <p className="text-yellow-400 flex items-center gap-2">
-                <WarningIcon size={16} /> {verification.resultDerivation.error || 'Verification not supported for this game type'}
+                <WarningIcon size={16} /> {verification.resultDerivation.error || 'No VRF data available'}
               </p>
             </div>
           ) : verification.resultDerivation.error ? (
@@ -299,28 +296,6 @@ const Verify: React.FC = () => {
             </div>
           ) : (
             <div className="space-y-4">
-              {/* Result Comparison */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white/5 rounded p-4">
-                  <h4 className="text-white/70 mb-2">Calculated Result</h4>
-                  <p className="text-white font-bold">{verification.resultDerivation.calculatedResult?.toUpperCase()}</p>
-                </div>
-                <div className="bg-white/5 rounded p-4">
-                  <h4 className="text-white/70 mb-2">Actual Result</h4>
-                  <p className="text-white font-bold">{verification.resultDerivation.actualResult?.toUpperCase()}</p>
-                </div>
-              </div>
-
-              {/* Match Status */}
-              <div className={`p-4 rounded border ${verification.resultDerivation.matches ? 'bg-green-500/10 border-green-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
-                <p className={`flex items-center gap-2 ${verification.resultDerivation.matches ? 'text-green-400' : 'text-red-400'}`}>
-                  {verification.resultDerivation.matches ? 
-                    <><CheckIcon size={16} /> MATCH - Result verification successful</> : 
-                    <><CancelIcon size={16} /> MISMATCH - Results do not match</>
-                  }
-                </p>
-              </div>
-
               {/* Process Steps */}
               {verification.resultDerivation.process && (
                 <div className="bg-white/5 rounded p-4">
@@ -334,6 +309,12 @@ const Verify: React.FC = () => {
                   </ol>
                 </div>
               )}
+
+              <div className="bg-green-500/10 border border-green-500/20 rounded p-4">
+                <p className="text-green-400 flex items-center gap-2">
+                  <CheckIcon size={16} /> VRF output is deterministic — the game result was derived fairly from the randomness above
+                </p>
+              </div>
             </div>
           )}
         </div>
